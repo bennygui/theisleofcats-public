@@ -1,0 +1,2387 @@
+/**
+ *------
+ * BGA framework: © Gregory Isabelli <gisabelli@boardgamearena.com> & Emmanuel Colin <ecolin@boardgamearena.com>
+ * theisleofcats implementation : © Guillaume Benny bennygui@gmail.com
+ *
+ * This code has been produced on the BGA studio platform for use on http://boardgamearena.com.
+ * See http://en.boardgamearena.com/#!doc/Studio for more information.
+ * -----
+ *
+ * theisleofcats.css
+ *
+ * theisleofcats stylesheet
+ *
+ */
+
+@use "sass:map";
+$color-names: 'blue',
+'green',
+'orange',
+'purple',
+'red';
+$color-from-names: ('blue': #67bed0, 'green': #29b35a, 'orange': #dcb039, 'purple': #9866ab, 'red': #d45965);
+
+/*
+  * Player Panel
+  */
+
+.tioc-player-name-row {
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+.tioc-player-panel-row {
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &.tioc-compact .tioc-player-panel-pill {
+        padding-top: 2px;
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+    &.tioc-compact .tioc-player-panel-pill-counter {
+        font-size: 80%;
+    }
+    @media (min-width: 1247px) {
+        &.tioc-break {
+            flex-wrap: wrap;
+        }
+        &.tioc-break .tioc-player-panel-pill {
+            margin-right: 20px;
+        }
+    }
+}
+
+.tioc-player-panel-pill {
+    background-color: rgba(235, 255, 235, 0.25);
+    margin: 2px;
+    border-radius: 5px;
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.tioc-player-panel-pill-counter.big {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-left: 7px;
+    margin-right: 7px;
+}
+
+.tioc-player-panel-pill-counter {
+    text-align: center;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+.tioc-player-panel-draft {
+    width: 20px;
+    height: 20px;
+    background-image: url("img/tioc/small-icons.png");
+    background-position: -5px -150px;
+    margin: 5px;
+}
+
+.tioc-player-panel-fish {
+    width: 30px;
+    height: 30px;
+    background-image: url("img/tioc/small-icons.png");
+    background-position: 0px -90px;
+}
+
+.tioc-pay-fish {
+    width: 30px;
+    height: 30px;
+    background-image: url("img/tioc/small-icons.png");
+    background-position: 0px -90px;
+}
+
+.tioc-log-fish {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background-image: url("img/tioc/small-icons.png");
+    background-position: 0px -90px;
+}
+
+.tioc-player-panel-card {
+    width: 30px;
+    height: 30px;
+    background-image: url("img/tioc/small-icons.png");
+    background-position: 0px 0px;
+}
+
+.tioc-player-panel-card-table {
+    width: 30px;
+    height: 30px;
+    background-image: url("img/tioc/small-icons.png");
+    background-position: 0px -276px;
+}
+
+.tioc-player-panel-basket-remain {
+    width: 30px;
+    height: 30px;
+    background-image: url("img/tioc/small-icons.png");
+    background-position: 0px -60px;
+}
+
+.tioc-player-panel-basket-permanent {
+    width: 30px;
+    height: 30px;
+    background-image: url("img/tioc/small-icons.png");
+    background-position: 0px -30px;
+}
+
+.tioc-player-panel-private-lesson {
+    width: 30px;
+    height: 30px;
+    background-image: url("img/tioc/small-icons.png");
+    background-position: 0px -120px;
+}
+
+.tioc-player-panel-pass {
+    background-color: lightgray;
+}
+
+.tioc-player-panel-boat-container {
+    width: 154px;
+    height: 63px;
+    position: relative;
+}
+
+.tioc-player-panel-boat-container .tioc-grid {
+    z-index: 1;
+    position: absolute;
+    border: 1px transparent solid;
+    width: 5px;
+    height: 5px;
+}
+
+.tioc-player-panel-boat-container .tioc-grid[data-valid-grid="true"] {
+    border: 1px #ffffff80 solid;
+}
+
+@each $color-name in $color-names {
+    .tioc-player-panel-boat-container .tioc-grid.#{$color-name} {
+        background-color: map.get($color-from-names, $color-name);
+    }
+}
+
+.tioc-player-panel-boat-container .tioc-grid.colorless {
+    background-color: darkgray;
+}
+
+.tioc-player-panel-wrap {
+    flex-wrap: wrap;
+}
+
+.tioc-player-panel-align-end {
+    justify-content: flex-end;
+}
+
+#tioc-player-panel-preferences {
+    display: block;
+}
+
+.tioc-player-panel-preference {
+    font-size: 0.8rem;
+    margin: 3px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#tioc-player-panel-gear {
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.tioc-gear {
+    width: 30px;
+    height: 30px;
+    background-image: url("img/tioc/small-icons.png");
+    background-position: 0px -246px;
+    margin: 5px;
+    transform-origin: 15px 15px;
+    transition: transform 1s;
+    &:hover {
+        transform: rotate(180deg)
+    }
+    &.tioc-gear-inline {
+        display: inline-flex;
+        vertical-align: middle;
+        animation: tioc-gear 2s infinite alternate;
+    }
+}
+
+@keyframes tioc-gear {
+    0%,
+    50% {
+        transform: rotate(0deg);
+        animation-timing-function: ease-in-out;
+    }
+    100% {
+        transform: rotate(180deg);
+        animation-timing-function: ease-in-out;
+    }
+}
+
+.tioc-player-panel-preference-help {
+    width: 16px;
+    height: 16px;
+    background-image: url("img/tioc/small-icons.png");
+    background-position: -7px -170px;
+    display: inline-block;
+    cursor: pointer;
+    &:hover {
+        filter: drop-shadow(0px 0px 2px blue);
+    }
+}
+
+%tioc-player-panel-shape-face {
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    background-image: url("img/tioc/shape-faces.png");
+}
+
+.tioc-player-panel-shape-face-blue {
+    @extend %tioc-player-panel-shape-face;
+    background-position: 0px 0px;
+}
+
+.tioc-player-panel-shape-face-common {
+    @extend %tioc-player-panel-shape-face;
+    background-position: -20px 0px;
+}
+
+.tioc-player-panel-shape-face-green {
+    @extend %tioc-player-panel-shape-face;
+    background-position: -40px 0px;
+}
+
+.tioc-player-panel-shape-face-orange {
+    @extend %tioc-player-panel-shape-face;
+    background-position: -60px 0px;
+}
+
+.tioc-player-panel-shape-face-oshax {
+    @extend %tioc-player-panel-shape-face;
+    background-position: -80px 0px;
+}
+
+.tioc-player-panel-shape-face-purple {
+    @extend %tioc-player-panel-shape-face;
+    background-position: -100px 0px;
+}
+
+.tioc-player-panel-shape-face-rare {
+    @extend %tioc-player-panel-shape-face;
+    background-position: -120px 0px;
+}
+
+.tioc-player-panel-shape-face-red {
+    @extend %tioc-player-panel-shape-face;
+    background-position: -140px 0px;
+}
+
+.tioc-phase-4-icon {
+    width: 30px;
+    height: 30px;
+    background-image: url("img/tioc/small-icons.png");
+    background-position: 0px -30px;
+    display: inline-block;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+.tioc-phase-5-icon {
+    width: 30px;
+    height: 30px;
+    background-image: url("img/tioc/small-icons.png");
+    background-position: 0px -186px;
+    display: inline-block;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+.tioc-phase-anytime-icon {
+    width: 30px;
+    height: 30px;
+    background-image: url("img/tioc/small-icons.png");
+    background-position: 0px -216px;
+    display: inline-block;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+
+/*
+ * Main board
+ */
+
+#tioc-island-row,
+#tioc-island-row-bottom {
+    background-color: #47af419c;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+#tioc-left-field,
+#tioc-right-field {
+    min-width: 160px;
+    min-height: 319px;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    flex-flow: wrap;
+    flex: 1 1 0px;
+}
+
+#tioc-left-field-bottom,
+#tioc-right-field-bottom {
+    min-width: 160px;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    flex-flow: wrap;
+    flex: 1 1 0px;
+}
+
+#tioc-field-bottom-middle {
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    min-width: 80px;
+}
+
+#tioc-left-field .tioc-shape,
+#tioc-right-field .tioc-shape,
+#tioc-left-field-bottom .tioc-shape,
+#tioc-right-field-bottom .tioc-shape,
+#tioc-common-treasure-container .tioc-shape,
+#tioc-rare-treasure-container .tioc-shape,
+#tioc-oshax-container .tioc-shape {
+    margin: 5px;
+}
+
+// Overlap rare treasures: 5 types, 5 of each type
+$rare-overlap-margin-left: (1: 115,
+2: 75,
+3: 75,
+4: 75,
+5: 155);
+$scale: 10;
+@while ($scale <=100) {
+    $classStr: '';
+    @if $scale !=100 {
+        $classStr: '.tioc-scale-island-' + $scale;
+    }
+    #{$classStr} #tioc-rare-treasure-container {
+        .tioc-rare-overlap-2::after {
+            margin-left: calc(35px * #{$scale} / 100) !important;
+        }
+        @for $rare-overlap from 1 through 5 {
+            // after margin..
+            @for $sibling from 2 through 5 {
+                $strClass: ".tioc-rare-overlap-#{$rare-overlap}";
+                @for $count from 2 through $sibling {
+                    $strClass: "#{$strClass}+.tioc-rare-overlap-#{$rare-overlap}";
+                }
+                #{$strClass} {
+                    margin-left: calc(-#{map.get($rare-overlap-margin-left, $rare-overlap)}px * #{$scale} / 100) !important;
+                    margin-top: calc(#{7*$sibling}px * #{$scale} / 100) !important;
+                }
+            }
+        }
+    }
+    $scale: $scale+10;
+}
+
+#tioc-island {
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    background-image: url("img/tioc/island-board-standard-side.png");
+    width: 400px;
+    min-width: 400px;
+    height: 319px;
+}
+
+$scale: 10;
+$width: 400;
+$height: 319;
+@while ($scale < 100) {
+    .tioc-scale-island-#{$scale} #tioc-island {
+        background-size: #{$width * $scale / 100}px #{$height * $scale / 100}px !important;
+        width: #{$width * $scale / 100}px;
+        height: #{$height * $scale / 100}px;
+        min-width: #{$width * $scale / 100}px;
+    }
+    $scale: $scale+10;
+}
+
+.tioc-family #tioc-island {
+    background-image: url("img/tioc/island-board-family-side.png");
+}
+
+#tioc-island .tioc-grid {
+    z-index: 1;
+    position: absolute;
+    /*
+    border: 1px red solid;
+    width: 40px;
+    height: 40px;
+    */
+}
+
+$scale: 10;
+@while ($scale <=100) {
+    $classStr: '';
+    @if $scale !=100 {
+        $classStr: '.tioc-scale-island-' + $scale;
+    }
+    #{$classStr} #tioc-island-player-order-1 {
+        left: calc(165px * #{$scale / 100});
+        top: calc(21px * #{$scale / 100});
+    }
+    .tioc-family #{$classStr} #tioc-island-player-order-1 {
+        left: calc(196px * #{$scale / 100});
+    }
+    #{$classStr} #tioc-island-player-order-2 {
+        left: calc(194px * #{$scale / 100});
+        top: calc(64px * #{$scale / 100});
+    }
+    .tioc-family #{$classStr} #tioc-island-player-order-2 {
+        left: calc(163px * #{$scale / 100});
+    }
+    #{$classStr} #tioc-island-player-order-3 {
+        left: calc(165px * #{$scale / 100});
+        top: calc(111px * #{$scale / 100});
+    }
+    .tioc-family #{$classStr} #tioc-island-player-order-3 {
+        left: calc(196px * #{$scale / 100});
+    }
+    #{$classStr} #tioc-island-player-order-4 {
+        left: calc(201px * #{$scale / 100});
+        top: calc(149px * #{$scale / 100});
+    }
+    .tioc-family #{$classStr} #tioc-island-player-order-4 {
+        left: calc(170px * #{$scale / 100});
+    }
+    #{$classStr} #tioc-island-day-0 {
+        left: calc(279px * #{$scale / 100});
+        top: calc(274px * #{$scale / 100});
+    }
+    .tioc-family #{$classStr}#tioc-island-day-0 {
+        left: calc(290px * #{$scale / 100});
+    }
+    #{$classStr} #tioc-island-day-1 {
+        left: calc(237px * #{$scale / 100});
+        top: calc(274px * #{$scale / 100});
+    }
+    .tioc-family #{$classStr} #tioc-island-day-1 {
+        left: calc(248px * #{$scale / 100});
+    }
+    #{$classStr} #tioc-island-day-2 {
+        left: calc(195px * #{$scale / 100});
+        top: calc(274px * #{$scale / 100});
+    }
+    .tioc-family #{$classStr} #tioc-island-day-2 {
+        left: calc(206px * #{$scale / 100});
+    }
+    #{$classStr} #tioc-island-day-3 {
+        left: calc(153px * #{$scale / 100});
+        top: calc(274px * #{$scale / 100});
+    }
+    .tioc-family #{$classStr} #tioc-island-day-3 {
+        left: calc(164px * #{$scale / 100});
+    }
+    #{$classStr} #tioc-island-day-4 {
+        left: calc(111px * #{$scale / 100});
+        top: calc(274px * #{$scale / 100});
+    }
+    .tioc-family #{$classStr} #tioc-island-day-4 {
+        left: calc(122px * #{$scale / 100});
+    }
+    #{$classStr} #tioc-island-day-5 {
+        left: calc(69px * #{$scale / 100});
+        top: calc(274px * #{$scale / 100});
+    }
+    .tioc-family #{$classStr} #tioc-island-day-5 {
+        left: calc(80px * #{$scale / 100});
+    }
+    #{$classStr} #tioc-island-discard {
+        left: calc(40px * #{$scale / 100});
+        top: calc(40px * #{$scale / 100});
+        width: calc(300px * #{$scale / 100});
+        height: calc(250px * #{$scale / 100});
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    $scale: $scale+10;
+}
+
+
+/*
+ * Place for other shapes
+ */
+
+#tioc-oshax-container {
+    background-color: #7e4d1f9c;
+    display: flex;
+    justify-content: center;
+    flex-flow: wrap;
+}
+
+#tioc-common-treasure-container {
+    /*background-color: #ffe3419c;*/
+    display: flex;
+    justify-content: center;
+    flex-flow: wrap;
+    margin-top: 10px;
+}
+
+#tioc-public-lesson-container {
+    background-color: #498bc8a8;
+    display: flex;
+    justify-content: center;
+    flex-flow: wrap;
+    .tioc-card {
+        margin: 5px;
+    }
+}
+
+#tioc-played-discard-container {
+    background-color: #c8494955;
+    display: flex;
+    justify-content: flex-start;
+    overflow-x: scroll;
+    padding: 10px;
+    .tioc-card {
+        margin: 5px;
+    }
+}
+
+.tioc-discard-played-text {
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-align: center;
+    background-color: #ffe5b3;
+    border-radius: 10px;
+    padding: 2px;
+    margin: 5px;
+}
+
+#tioc-common-treasure-zone-100,
+#tioc-common-treasure-zone-101,
+#tioc-common-treasure-zone-102,
+#tioc-common-treasure-zone-103 {
+    width: 160px;
+}
+
+$scale: 10;
+@while ($scale < 100) {
+    .tioc-scale-island-#{$scale} #tioc-common-treasure-zone-100,
+    .tioc-scale-island-#{$scale} #tioc-common-treasure-zone-101,
+    .tioc-scale-island-#{$scale} #tioc-common-treasure-zone-102,
+    .tioc-scale-island-#{$scale} #tioc-common-treasure-zone-103 {
+        width: calc(160px * #{$scale} / 100) !important;
+    }
+    $scale: $scale+10;
+}
+
+#tioc-rare-treasure-container {
+    background-color: #eacb199c;
+    display: flex;
+    justify-content: center;
+    flex-flow: wrap;
+}
+
+#tioc-solo-lesson-container {
+    background-color: #498bc8a8;
+    display: flex;
+    justify-content: center;
+    flex-flow: wrap;
+    .tioc-card {
+        margin: 5px;
+    }
+}
+
+#tioc-solo-color-container {
+    background-color: #a449c8a8;
+    display: flex;
+    justify-content: center;
+    flex-flow: wrap;
+    .tioc-card {
+        margin: 5px;
+    }
+}
+
+#tioc-solo-basket-container {
+    background-color: #4dc849a8;
+    display: flex;
+    justify-content: center;
+    flex-flow: wrap;
+    .tioc-card {
+        margin: 5px;
+    }
+}
+
+
+/*
+ * Player cards
+ */
+
+.tioc-card-container-title {
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+    display: inline-block;
+    margin-left: 3px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    padding-bottom: 2px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 2px;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+.tioc-player-card-draft-container {
+    display: flex;
+    justify-content: center;
+    flex-flow: wrap;
+    position: relative;
+}
+
+.tioc-player-card-buy-container {
+    background-color: #0e1bda59;
+    display: flex;
+    justify-content: center;
+    flex-flow: wrap;
+    position: relative;
+}
+
+.tioc-player-card-hand-container {
+    background-color: #5bea1959;
+    display: flex;
+    justify-content: center;
+    flex-flow: wrap;
+    position: relative;
+}
+
+.tioc-player-card-table-container {
+    background-color: #dcea1959;
+    display: flex;
+    justify-content: center;
+    flex-flow: wrap;
+    position: relative;
+}
+
+.tioc-player-card-private-lesson-container {
+    background-color: #498bc8a8;
+    display: flex;
+    justify-content: center;
+    flex-flow: wrap;
+    position: relative;
+}
+
+.tioc-player-permanent-basket-container {
+    display: flex;
+    justify-content: center;
+    flex-flow: column;
+    flex-wrap: wrap;
+    position: relative;
+    align-self: start;
+}
+
+.tioc-player-card-draft-container .tioc-card,
+.tioc-player-card-buy-container .tioc-card,
+.tioc-player-card-hand-container .tioc-card,
+.tioc-player-card-table-container .tioc-card,
+.tioc-player-card-private-lesson-container .tioc-card,
+.tioc-player-permanent-basket-container .tioc-card,
+.tioc-player-permanent-basket-container .tioc-basket {
+    margin: 5px;
+}
+
+.tioc-basket-private-lesson-boat-wrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.tioc-private-lesson-boat-wrap {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.tioc-player-top-shapes-boat-wrap {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (max-width: 1520px) {
+    .tioc-basket-private-lesson-boat-wrap {
+        display: flex;
+        flex-direction: column;
+    }
+    .tioc-player-permanent-basket-container {
+        flex-flow: row;
+        align-self: center;
+    }
+}
+
+@media (max-width: 1420px) {
+    .tioc-private-lesson-boat-wrap {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+
+/*
+ * Player boats
+ */
+
+#tioc-all-player-boat-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#tioc-all-player-boat-row .whiteblock:first-child {
+    flex-basis: 100%;
+}
+
+$scale: 10;
+@while ($scale <=100) {
+    $classStr: '';
+    @if $scale !=100 {
+        $classStr: '.tioc-scale-boat-' + $scale;
+    }
+    #{$classStr} .tioc-player-boat {
+        margin: auto;
+        position: relative;
+        background-image: url("img/tioc/player-board-standard-1.jpg");
+        width: calc(980px * #{$scale} / 100) !important;
+        height: calc(479px * #{$scale} / 100) !important;
+        background-size: calc(980px * #{$scale} / 100) calc(479px * #{$scale} / 100) !important;
+    }
+    #{$classStr} .tioc-player-boat .tioc-grid {
+        z-index: 1;
+        position: absolute;
+        width: calc(40px * #{$scale} / 100) !important;
+        height: calc(40px * #{$scale} / 100) !important;
+        //border: 1px red solid;
+    }
+    #{$classStr} .tioc-player-boat-hide-shapes {
+        position: absolute;
+        right: calc(155px * #{$scale} / 100) !important;
+        top: calc(-2px * #{$scale} / 100) !important;
+        font-size: calc(1rem * #{$scale} / 100) !important;
+        /* Disallow selecting text */
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+    #{$classStr} .tioc-player-boat-hide-overlay {
+        position: absolute;
+        right: calc(700px * #{$scale} / 100) !important;
+        top: calc(-2px * #{$scale} / 100) !important;
+        font-size: calc(1rem * #{$scale} / 100) !important;
+        /* Disallow selecting text */
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+    #{$classStr} .tioc-player-boat-legend-score {
+        position: absolute;
+        width: calc(183px * #{$scale} / 100);
+        height: calc(130px * #{$scale} / 100);
+        bottom: calc(3px * #{$scale} / 100);
+        left: calc(8px * #{$scale} / 100);
+        z-index: 2;
+    }
+    #{$classStr} .tioc-player-boat-legend-round {
+        position: absolute;
+        width: calc(128px * #{$scale} / 100);
+        height: calc(167px * #{$scale} / 100);
+        top: calc(4px * #{$scale} / 100);
+        right: calc(14px * #{$scale} / 100);
+        z-index: 2;
+    }
+    $scale: $scale+10;
+}
+
+.tioc-player-boat .tioc-shape {
+    filter: drop-shadow(0 0 2px yellow);
+}
+
+.tioc-player-boat.blue {
+    background-image: url("img/tioc/player-board-standard-1.jpg");
+}
+
+.tioc-player-boat.green {
+    background-image: url("img/tioc/player-board-standard-2.jpg");
+}
+
+.tioc-player-boat.red {
+    background-image: url("img/tioc/player-board-standard-3.jpg");
+}
+
+.tioc-player-boat.purple {
+    background-image: url("img/tioc/player-board-standard-4.jpg");
+}
+
+.tioc-family .tioc-player-boat.blue {
+    background-image: url("img/tioc/player-board-family-1.jpg");
+}
+
+.tioc-family .tioc-player-boat.green {
+    background-image: url("img/tioc/player-board-family-2.jpg");
+}
+
+.tioc-family .tioc-player-boat.red {
+    background-image: url("img/tioc/player-board-family-3.jpg");
+}
+
+.tioc-family .tioc-player-boat.purple {
+    background-image: url("img/tioc/player-board-family-4.jpg");
+}
+
+.tioc-player-boat-wrap-wrap {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.tioc-player-boat-hide-shapes.pressed,
+.tioc-player-boat-hide-overlay.pressed {
+    filter: drop-shadow(0 0 2px white);
+    text-shadow: 2px 2px black;
+}
+
+.tioc-player-boat-hide-shapes.inactive,
+.tioc-player-boat-hide-shapes.inactive:hover,
+.tioc-player-boat-hide-overlay.inactive,
+.tioc-player-boat-hide-overlay.inactive:hover {
+    filter: none;
+    text-shadow: none;
+    background: #787878;
+    background: -webkit-gradient(linear, left top, left bottom, from(#888), to(#787878));
+    background: -webkit-linear-gradient(top, #888, #787878);
+    background: -moz-linear-gradient(top, #888, #787878);
+    background: -ms-linear-gradient(top, #888, #787878);
+    background: -o-linear-gradient(top, #888, #787878);
+}
+
+$scale: 10;
+@while ($scale <=100) {
+    $classStr: '';
+    @if $scale !=100 {
+        $classStr: '.tioc-scale-boat-' + $scale;
+    }
+    // Room icons
+    #{$classStr} .room-icon {
+        background-image: url("img/tioc/room-icon.png");
+        background-repeat: no-repeat;
+        width: calc(20px * #{$scale} / 100) !important;
+        height: calc(20px * #{$scale} / 100) !important;
+        background-size: calc(20px * #{$scale} / 100) calc(120px * #{$scale} / 100) !important;
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        &.moon-top {
+            background-position: 0px calc(-60px * #{$scale} / 100);
+        }
+        &.moon-bottom {
+            background-position: 0px calc(-40px * #{$scale} / 100);
+        }
+        &.parrot-back {
+            background-position: 0px calc(-80px * #{$scale} / 100);
+        }
+        &.parrot-front {
+            background-position: 0px calc(-100px * #{$scale} / 100);
+        }
+        &.apple {
+            background-position: 0px calc(0px * #{$scale} / 100);
+        }
+        &.corn {
+            background-position: 0px calc(-20px * #{$scale} / 100);
+        }
+    }
+    // Map icons
+    #{$classStr} .map-icon {
+        background-image: url("img/tioc/map-icon.png");
+        background-repeat: no-repeat;
+        width: calc(40px * #{$scale} / 100) !important;
+        height: calc(40px * #{$scale} / 100) !important;
+        background-size: calc(40px * #{$scale} / 100) calc(200px * #{$scale} / 100) !important;
+        position: absolute;
+        left: 2px;
+        top: 0px;
+        transform: scale(0.8);
+        &.blue {
+            background-position: 0px calc(0px * #{$scale} / 100);
+            filter: drop-shadow(0px 0px 5px blue) drop-shadow(0px 0px 5px blue)drop-shadow(0px 0px 5px blue);
+        }
+        &.green {
+            background-position: 0px calc(-40px * #{$scale} / 100);
+            filter: drop-shadow(0px 0px 5px green) drop-shadow(0px 0px 5px green) drop-shadow(0px 0px 5px green);
+        }
+        &.orange {
+            background-position: 0px calc(-80px * #{$scale} / 100);
+            filter: drop-shadow(0px 0px 5px orange) drop-shadow(0px 0px 5px orange) drop-shadow(0px 0px 5px orange);
+        }
+        &.purple {
+            background-position: 0px calc(-120px * #{$scale} / 100);
+            filter: drop-shadow(0px 0px 5px purple) drop-shadow(0px 0px 5px purple) drop-shadow(0px 0px 5px purple);
+        }
+        &.red {
+            background-position: 0px calc(-160px * #{$scale} / 100);
+            filter: drop-shadow(0px 0px 5px red) drop-shadow(0px 0px 5px red) drop-shadow(0px 0px 5px red);
+        }
+    }
+    // Grid overlay
+    #{$classStr} .tioc-grid-overlay {
+        position: absolute;
+        z-index: 0;
+        width: calc(40px * #{$scale} / 100) !important;
+        height: calc(40px * #{$scale} / 100) !important;
+        pointer-events: none;
+        &.empty {
+            background-color: black;
+            opacity: 0.4;
+        }
+        &.top {
+            border-top: 2px red solid;
+        }
+        &.bottom {
+            border-bottom: 2px red solid;
+        }
+        &.left {
+            border-left: 2px red solid;
+        }
+        &.right {
+            border-right: 2px red solid;
+        }
+    }
+    $scale: $scale+10;
+}
+
+
+/*
+ * Baskets
+ */
+
+$scale: 10;
+@while ($scale <=100) {
+    $classStr: '';
+    @if $scale !=100 {
+        $classStr: '.tioc-scale-basket-' + $scale;
+    }
+    #{$classStr} .tioc-basket {
+        background-image: url("img/tioc/baskets.png");
+        filter: drop-shadow(0 0 1px black);
+        width: calc(100px * #{$scale} / 100) !important;
+        height: calc(79px * #{$scale} / 100) !important;
+        background-size: calc(100px * #{$scale} / 100) calc(158px * #{$scale} / 100) !important;
+        background-position: 0px 0px;
+    }
+    #{$classStr} .tioc-basket.used {
+        border: none;
+        background-position: 0px calc(-79px * #{$scale} / 100) !important;
+    }
+    $scale: $scale+10;
+}
+
+
+/*
+ * Meeples
+ */
+
+.tioc-meeple {
+    background-image: url("img/tioc/meeples.png");
+    filter: drop-shadow(0 0 1px black);
+    position: relative;
+}
+
+.tioc-meeple.small {
+    background-image: url("img/tioc/meeples-small.png");
+}
+
+$scale: 10;
+@while ($scale <=100) {
+    $classStr: '';
+    @if $scale !=100 {
+        $classStr: '.tioc-scale-island-' + $scale;
+    }
+    #{$classStr} .tioc-meeple.cat.blue {
+        width: calc(39px * #{$scale / 100});
+        height: calc(43px * #{$scale / 100});
+        background-size: calc(378px * #{$scale} / 100) calc(60px * #{$scale} / 100) !important;
+        background-position: calc(0px * #{$scale} / 100) 0px;
+    }
+    #{$classStr} .tioc-meeple.cat.green {
+        width: calc(67px * #{$scale / 100});
+        height: calc(40px * #{$scale / 100});
+        background-size: calc(378px * #{$scale} / 100) calc(60px * #{$scale} / 100) !important;
+        background-position: calc(-49px * #{$scale} / 100) 0px;
+    }
+    #{$classStr} .tioc-meeple.cat.orange {
+        width: calc(59px * #{$scale / 100});
+        height: calc(29px * #{$scale / 100});
+        background-size: calc(378px * #{$scale} / 100) calc(60px * #{$scale} / 100) !important;
+        background-position: calc(-124px * #{$scale} / 100) 0px;
+    }
+    #{$classStr} .tioc-meeple.cat.purple {
+        width: calc(38px * #{$scale / 100});
+        height: calc(48px * #{$scale / 100});
+        background-size: calc(378px * #{$scale} / 100) calc(60px * #{$scale} / 100) !important;
+        background-position: calc(-192px * #{$scale} / 100) 0px;
+    }
+    #{$classStr} .tioc-meeple.cat.red {
+        width: calc(58px * #{$scale / 100});
+        height: calc(45px * #{$scale / 100});
+        background-size: calc(378px * #{$scale} / 100) calc(60px * #{$scale} / 100) !important;
+        background-position: calc(-240px * #{$scale} / 100) 0px;
+    }
+    #{$classStr} .tioc-meeple.boat {
+        width: calc(70px * #{$scale / 100});
+        height: calc(60px * #{$scale / 100});
+        background-position: calc(-308px * #{$scale} / 100) 0px;
+        background-size: calc(378px * #{$scale} / 100) calc(60px * #{$scale} / 100) !important;
+        filter: drop-shadow(0 0 5px white);
+    }
+    #{$classStr} .tioc-meeple.cat.blue.small {
+        width: calc(19px * #{$scale / 100});
+        height: calc(21px * #{$scale / 100});
+        background-size: calc(189px * #{$scale} / 100) calc(30px * #{$scale} / 100) !important;
+        background-position: calc(0px * #{$scale} / 100) 0px;
+    }
+    #{$classStr} .tioc-meeple.cat.green.small {
+        width: calc(33px * #{$scale / 100});
+        height: calc(21px * #{$scale / 100});
+        background-size: calc(189px * #{$scale} / 100) calc(30px * #{$scale} / 100) !important;
+        background-position: calc(-24px * #{$scale} / 100) 0px;
+    }
+    #{$classStr} .tioc-meeple.cat.orange.small {
+        width: calc(29px * #{$scale / 100});
+        height: calc(14px * #{$scale / 100});
+        background-size: calc(189px * #{$scale} / 100) calc(30px * #{$scale} / 100) !important;
+        background-position: calc(-62px * #{$scale} / 100) 0px;
+    }
+    #{$classStr} .tioc-meeple.cat.purple.small {
+        width: calc(21px * #{$scale / 100});
+        height: calc(24px * #{$scale / 100});
+        background-size: calc(189px * #{$scale} / 100) calc(30px * #{$scale} / 100) !important;
+        background-position: calc(-95px * #{$scale} / 100) 0px;
+    }
+    #{$classStr} .tioc-meeple.cat.red.small {
+        width: calc(29px * #{$scale / 100});
+        height: calc(22px * #{$scale / 100});
+        background-size: calc(189px * #{$scale} / 100) calc(30px * #{$scale} / 100) !important;
+        background-position: calc(-119px * #{$scale} / 100) 0px;
+    }
+    #{$classStr} .tioc-meeple.boat.small {
+        width: calc(37px * #{$scale / 100});
+        height: calc(30px * #{$scale / 100});
+        background-size: calc(189px * #{$scale} / 100) calc(30px * #{$scale} / 100) !important;
+        background-position: calc(-152px * #{$scale} / 100) 0px;
+    }
+    $scale: $scale+10;
+}
+
+
+/*
+ * Shapes
+ */
+
+$shape-back-width: 2599;
+$shape-back-height: 1360;
+.tioc-shape {
+    background-image: url("img/tioc/tiles.png");
+    background-size: #{$shape-back-width}px #{$shape-back-height}px;
+    filter: drop-shadow(0 0 1px black);
+    z-index: 1;
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+$scale: 10;
+@while ($scale < 100) {
+    .tioc-scale-shape-#{$scale} .tioc-shape {
+        background-size: #{$shape-back-width * $scale / 100}px #{$shape-back-height * $scale / 100}px !important;
+    }
+    $scale: $scale+10;
+}
+
+#tioc-island-and-field-container .tioc-shape::after {
+    content: attr(data-solo-order);
+    font-weight: bold;
+    font-size: 2rem;
+    color: black;
+    // Cannot use drop shadow here: Safari crashes!
+    // filter: drop-shadow(0px 0px 1px white) drop-shadow(0px 0px 1px white) drop-shadow(0px 0px 1px white);
+    -webkit-text-stroke-color: white;
+    -webkit-text-stroke-width: 0.1rem;
+}
+
+.tioc-shape-fade-out {
+    opacity: 0;
+}
+
+.tioc-try-shapes-hidden {
+    display: none;
+}
+
+#logs .tioc-shape {
+    margin: 4px;
+}
+
+.tioc-shape-new-to-player {
+    filter: drop-shadow(0 0 2px blue) brightness(1.1) !important;
+}
+
+.tioc-shape-new-drawn {
+    filter: drop-shadow(0 0 10px blue);
+}
+
+
+/*
+ * Shapes: Cats
+ */
+
+@mixin mixin-shape-scale($shape-type,
+$color-name,
+$shape-def-id,
+$width,
+$height,
+$x,
+$y,
+$tile-size,
+$scale) {
+    $prefix: '';
+    @if $scale !=100 {
+        $prefix: '.tioc-scale-shape-' + $scale;
+    }
+    $color-string: '';
+    @if $color-name !=null {
+        $color-string: '.' + $color-name;
+    }
+    #{$prefix} .tioc-shape.shape-type-#{$shape-type}#{$color-string}.shape-def-#{$shape-def-id} {
+        width: #{($width*$tile-size - 1)*$scale / 100}px;
+        height: #{($height*$tile-size)*$scale / 100}px;
+        background-position: -#{$x*$tile-size*$scale/100}px -#{$y*$tile-size*$scale/100}px;
+    }
+}
+
+@mixin mixin-shape( $shape-type,
+$color-name,
+$shape-def-id,
+$width,
+$height,
+$x,
+$y,
+$tile-size) {
+    $scale: 10;
+    @while ($scale <=100) {
+        @include mixin-shape-scale($shape-type,
+        $color-name,
+        $shape-def-id,
+        $width,
+        $height,
+        $x,
+        $y,
+        $tile-size,
+        $scale);
+        $scale: $scale+10;
+    }
+}
+
+$tile-size: 40;
+$y: 0;
+@each $color-name in $color-names {
+    $shape-def-id: 400;
+    $x: 0;
+    $width: 3;
+    $height: 3;
+    @include mixin-shape(0,
+    $color-name,
+    $shape-def-id,
+    $width,
+    $height,
+    $x,
+    $y,
+    $tile-size);
+    $shape-def-id: 401;
+    $x: $x+$width;
+    $width: 3;
+    $height: 3;
+    @include mixin-shape(0,
+    $color-name,
+    $shape-def-id,
+    $width,
+    $height,
+    $x,
+    $y,
+    $tile-size);
+    $shape-def-id: 402;
+    $x: $x+$width;
+    $width: 2;
+    $height: 4;
+    @include mixin-shape(0,
+    $color-name,
+    $shape-def-id,
+    $width,
+    $height,
+    $x,
+    $y,
+    $tile-size);
+    $shape-def-id: 403;
+    $x: $x+$width;
+    $width: 2;
+    $height: 4;
+    @include mixin-shape(0,
+    $color-name,
+    $shape-def-id,
+    $width,
+    $height,
+    $x,
+    $y,
+    $tile-size);
+    $shape-def-id: 404;
+    $x: $x+$width;
+    $width: 2;
+    $height: 3;
+    @include mixin-shape(0,
+    $color-name,
+    $shape-def-id,
+    $width,
+    $height,
+    $x,
+    $y,
+    $tile-size);
+    $shape-def-id: 405;
+    $x: $x+$width;
+    $width: 3;
+    $height: 3;
+    @include mixin-shape(0,
+    $color-name,
+    $shape-def-id,
+    $width,
+    $height,
+    $x,
+    $y,
+    $tile-size);
+    $shape-def-id: 406;
+    $x: $x+$width;
+    $width: 4;
+    $height: 3;
+    @include mixin-shape(0,
+    $color-name,
+    $shape-def-id,
+    $width,
+    $height,
+    $x,
+    $y,
+    $tile-size);
+    $shape-def-id: 407;
+    $x: $x+$width;
+    $width: 3;
+    $height: 3;
+    @include mixin-shape(0,
+    $color-name,
+    $shape-def-id,
+    $width,
+    $height,
+    $x,
+    $y,
+    $tile-size);
+    $shape-def-id: 408;
+    $x: $x+$width;
+    $width: 2;
+    $height: 4;
+    @include mixin-shape(0,
+    $color-name,
+    $shape-def-id,
+    $width,
+    $height,
+    $x,
+    $y,
+    $tile-size);
+    $shape-def-id: 409;
+    $x: $x+$width;
+    $width: 2;
+    $height: 3;
+    @include mixin-shape(0,
+    $color-name,
+    $shape-def-id,
+    $width,
+    $height,
+    $x,
+    $y,
+    $tile-size);
+    $shape-def-id: 410;
+    $x: $x+$width;
+    $width: 4;
+    $height: 2;
+    @include mixin-shape(0,
+    $color-name,
+    $shape-def-id,
+    $width,
+    $height,
+    $x,
+    $y,
+    $tile-size);
+    $shape-def-id: 411;
+    $x: $x+$width;
+    $width: 3;
+    $height: 3;
+    @include mixin-shape(0,
+    $color-name,
+    $shape-def-id,
+    $width,
+    $height,
+    $x,
+    $y,
+    $tile-size);
+    $shape-def-id: 412;
+    $x: $x+$width;
+    $width: 3;
+    $height: 3;
+    @include mixin-shape(0,
+    $color-name,
+    $shape-def-id,
+    $width,
+    $height,
+    $x,
+    $y,
+    $tile-size);
+    $shape-def-id: 413;
+    $x: $x+$width;
+    $width: 4;
+    $height: 2;
+    @include mixin-shape(0,
+    $color-name,
+    $shape-def-id,
+    $width,
+    $height,
+    $x,
+    $y,
+    $tile-size);
+    $shape-def-id: 414;
+    $x: $x+$width;
+    $width: 3;
+    $height: 2;
+    @include mixin-shape(0,
+    $color-name,
+    $shape-def-id,
+    $width,
+    $height,
+    $x,
+    $y,
+    $tile-size);
+    $shape-def-id: 415;
+    $x: $x+$width;
+    $width: 1;
+    $height: 5;
+    @include mixin-shape(0,
+    $color-name,
+    $shape-def-id,
+    $width,
+    $height,
+    $x,
+    $y,
+    $tile-size);
+    $shape-def-id: 416;
+    $x: $x+$width;
+    $width: 3;
+    $height: 4;
+    @include mixin-shape(0,
+    $color-name,
+    $shape-def-id,
+    $width,
+    $height,
+    $x,
+    $y,
+    $tile-size);
+    $y: $y+5;
+}
+
+
+/*
+ * Shapes: Oshax
+ */
+
+$shape-def-id: 300;
+$x: 0;
+$width: 4;
+$height: 3;
+@include mixin-shape(1,
+null,
+$shape-def-id,
+$width,
+$height,
+$x,
+$y,
+$tile-size);
+$shape-def-id: 301;
+$x: $x+$width;
+$width: 3;
+$height: 4;
+@include mixin-shape(1,
+null,
+$shape-def-id,
+$width,
+$height,
+$x,
+$y,
+$tile-size);
+$shape-def-id: 302;
+$x: $x+$width;
+$width: 3;
+$height: 4;
+@include mixin-shape(1,
+null,
+$shape-def-id,
+$width,
+$height,
+$x,
+$y,
+$tile-size);
+$shape-def-id: 303;
+$x: $x+$width;
+$width: 3;
+$height: 4;
+@include mixin-shape(1,
+null,
+$shape-def-id,
+$width,
+$height,
+$x,
+$y,
+$tile-size);
+$shape-def-id: 304;
+$x: $x+$width;
+$width: 4;
+$height: 3;
+@include mixin-shape(1,
+null,
+$shape-def-id,
+$width,
+$height,
+$x,
+$y,
+$tile-size);
+$shape-def-id: 305;
+$x: $x+$width;
+$width: 4;
+$height: 3;
+@include mixin-shape(1,
+null,
+$shape-def-id,
+$width,
+$height,
+$x,
+$y,
+$tile-size);
+
+/*
+ * Shapes: Common treasures
+ */
+
+$y: $y+4;
+$x: 0;
+$shape-def-id: 100;
+$width: 1;
+$height: 1;
+@include mixin-shape(2,
+null,
+$shape-def-id,
+$width,
+$height,
+$x,
+$y,
+$tile-size);
+$shape-def-id: 101;
+$x: $x+$width;
+$width: 2;
+$height: 1;
+@include mixin-shape(2,
+null,
+$shape-def-id,
+$width,
+$height,
+$x,
+$y,
+$tile-size);
+$shape-def-id: 102;
+$x: $x+$width;
+$width: 2;
+$height: 2;
+@include mixin-shape(2,
+null,
+$shape-def-id,
+$width,
+$height,
+$x,
+$y,
+$tile-size);
+$shape-def-id: 103;
+$x: $x+$width;
+$width: 3;
+$height: 1;
+@include mixin-shape(2,
+null,
+$shape-def-id,
+$width,
+$height,
+$x,
+$y,
+$tile-size);
+
+/*
+ * Shapes: Rare treasures
+ */
+
+$y: $y+2;
+$x: 0;
+$shape-def-id: 200;
+$width: 2;
+$height: 3;
+@include mixin-shape(3,
+null,
+$shape-def-id,
+$width,
+$height,
+$x,
+$y,
+$tile-size);
+@for $shape-def-id from 201 through 205 {
+    $x: $x+$width;
+    $width: 2;
+    $height: 3;
+    @include mixin-shape(3,
+    null,
+    $shape-def-id,
+    $width,
+    $height,
+    $x,
+    $y,
+    $tile-size);
+}
+
+@for $shape-def-id from 206 through 209 {
+    $x: $x+$width;
+    $width: 2;
+    $height: 2;
+    @include mixin-shape(3,
+    null,
+    $shape-def-id,
+    $width,
+    $height,
+    $x,
+    $y,
+    $tile-size);
+}
+
+$shape-def-id: 210;
+$x: $x+$width;
+$width: 3;
+$height: 2;
+@include mixin-shape(3,
+null,
+$shape-def-id,
+$width,
+$height,
+$x,
+$y,
+$tile-size);
+$shape-def-id: 211;
+$x: $x+$width;
+$width: 2;
+$height: 2;
+@include mixin-shape(3,
+null,
+$shape-def-id,
+$width,
+$height,
+$x,
+$y,
+$tile-size);
+@for $shape-def-id from 212 through 216 {
+    $x: $x+$width;
+    $width: 4;
+    $height: 1;
+    @include mixin-shape(3,
+    null,
+    $shape-def-id,
+    $width,
+    $height,
+    $x,
+    $y,
+    $tile-size);
+}
+
+@for $shape-def-id from 217 through 220 {
+    $x: $x+$width;
+    $width: 3;
+    $height: 2;
+    @include mixin-shape(3,
+    null,
+    $shape-def-id,
+    $width,
+    $height,
+    $x,
+    $y,
+    $tile-size);
+}
+
+@for $shape-def-id from 221 through 224 {
+    $x: $x+$width;
+    $width: 2;
+    $height: 3;
+    @include mixin-shape(3,
+    null,
+    $shape-def-id,
+    $width,
+    $height,
+    $x,
+    $y,
+    $tile-size);
+}
+
+
+/*
+ * Shapes cat meeples
+ */
+
+//.tioc-shape.shape-def-300 .tioc-meeple.cat {}
+.tioc-shape.shape-def-301 .tioc-meeple.cat {
+    transform: rotate(90deg);
+}
+
+.tioc-shape.shape-def-302 .tioc-meeple.cat {
+    top: -25px;
+    left: -20px;
+}
+
+.tioc-shape.shape-def-303 .tioc-meeple.cat {
+    top: 15px;
+}
+
+//.tioc-shape.shape-def-304 .tioc-meeple.cat {}
+//.tioc-shape.shape-def-305 .tioc-meeple.cat {}
+.tioc-card-end-score {
+    padding-top: 5px;
+    padding-right: 10px;
+    font-weight: bold;
+    font-size: 25px;
+    color: black;
+    align-self: end;
+    // Cannot use drop shadow here: Safari crashes!
+    // filter: drop-shadow(0px 0px 1px white) drop-shadow(0px 0px 1px white) drop-shadow(0px 0px 1px white);
+    -webkit-text-stroke-color: black;
+    -webkit-text-stroke-width: 1px;
+}
+
+#tioc-solo-lesson-container .tioc-card-end-score,
+#tioc-solo-color-container .tioc-card-end-score {
+    // Cannot use drop shadow here: Safari crashes!
+    // filter: drop-shadow(0px 0px 1px white) drop-shadow(0px 0px 1px white) drop-shadow(0px 0px 1px white);
+    -webkit-text-stroke-color: white;
+    -webkit-text-stroke-width: 1px;
+}
+
+
+/*
+ * Cards
+ */
+
+$card-width: 150;
+$card-height: 209.533333333;
+$card-tooltip-width: 250;
+$card-tooltip-height: 349.2;
+.tioc-card {
+    background-size: 1000% auto;
+    width: #{$card-width}px;
+    height: #{$card-height}px;
+    border-radius: 5px;
+    filter: drop-shadow(0 0 1px black);
+    position: relative;
+    /* Can have a cat meeple and/or score on top */
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-flow: column;
+}
+
+$scale: 10;
+@while ($scale < 100) {
+    .tioc-scale-card-#{$scale} .dijitTooltip .tioc-card {
+        width: #{$card-tooltip-width}px !important;
+        height: #{$card-tooltip-height}px !important;
+    }
+    .tioc-scale-card-#{$scale} .tioc-card {
+        width: #{$card-width * $scale / 100}px !important;
+        height: #{$card-height * $scale / 100}px !important;
+    }
+    $scale: $scale+10;
+}
+
+$x: 0;
+$y: 0;
+@for $card-id from 1 through 150 {
+    $image: url("img/tioc/cards-1.jpg");
+    $calc-y: calc(100% / 9 * #{$y});
+    @if $y < 10 {
+        $image: url("img/tioc/cards-1.jpg");
+        $calc-y: calc(100% / 9 * #{$y});
+    }
+    @else {
+        $image: url("img/tioc/cards-2.jpg");
+        $calc-y: calc(100% / 4 * #{$y - 10});
+    }
+    #tioc-card-id-#{$card-id},
+    .tioc-card-id-#{$card-id} {
+        background-image: #{$image};
+        background-position: calc(100% / 9 * #{$x}) #{$calc-y};
+        order: $card-id;
+    }
+    $x: $x+1;
+    @if $x>=10 {
+        $x: 0;
+        $y: $y + 1;
+    }
+}
+
+// Family
+$x: 0;
+$y: 0;
+@for $card-id from 151 through 168 {
+    #tioc-card-id-#{$card-id},
+    .tioc-card-id-#{$card-id} {
+        background-size: 1000% auto;
+        background-image: url("img/tioc/cards-family.jpg");
+        background-position: calc(100% / 9 * #{$x}) calc(100% / 1 * #{$y});
+        order: $card-id;
+    }
+    $x: $x+1;
+    @if $x>=10 {
+        $x: 0;
+        $y: $y + 1;
+    }
+}
+
+// Solo
+$x: 0;
+$y: 0;
+@for $card-id from 169 through 215 {
+    #tioc-card-id-#{$card-id},
+    .tioc-card-id-#{$card-id} {
+        background-size: 1000% auto;
+        background-image: url("img/tioc/cards-solo.jpg");
+        background-position: calc(100% / 9 * #{$x}) calc(100% / 4 * #{$y});
+        order: $card-id;
+    }
+    $x: $x+1;
+    @if $x>=10 {
+        $x: 0;
+        $y: $y + 1;
+    }
+}
+
+// Solo basket back
+#tioc-card-id-999,
+.tioc-card-id-999 {
+    background-size: 1000% auto;
+    background-image: url("img/tioc/cards-solo.jpg");
+    background-position: calc(100% / 9 * #{$x}) calc(100% / 4 * #{$y});
+    order: 999;
+}
+
+// Regular card back
+$x: $x+1;
+#tioc-card-id-998,
+.tioc-card-id-998 {
+    background-size: 1000% auto;
+    background-image: url("img/tioc/cards-solo.jpg");
+    background-position: calc(100% / 9 * #{$x}) calc(100% / 4 * #{$y});
+    order: 998;
+}
+
+$x: 0;
+$y: 0;
+@for $card-id from 1 through 150 {
+    .tioc-card-tooltip-id-#{$card-id} {
+        @if $y < 10 {
+            background-image: url("img/tioc/cards-1.jpg");
+        }
+        @else {
+            background-image: url("img/tioc/cards-2.jpg");
+        }
+        background-position: -#{$x*$card-tooltip-width}px -#{$y*$card-tooltip-height}px;
+        width: #{$card-tooltip-width}px;
+        height: #{$card-tooltip-height}px;
+    }
+    $x: $x+1;
+    @if $x>=10 {
+        $x: 0;
+        $y: $y + 1;
+    }
+}
+
+// Family
+$x: 0;
+$y: 0;
+@for $card-id from 151 through 168 {
+    .tioc-card-tooltip-id-#{$card-id} {
+        background-image: url("img/tioc/cards-family.jpg");
+        background-position: -#{$x*$card-tooltip-width}px -#{$y*$card-tooltip-height}px;
+        width: #{$card-tooltip-width}px;
+        height: #{$card-tooltip-height}px;
+    }
+    $x: $x+1;
+    @if $x>=10 {
+        $x: 0;
+        $y: $y + 1;
+    }
+}
+
+// Solo
+$x: 0;
+$y: 0;
+@for $card-id from 169 through 215 {
+    .tioc-card-tooltip-id-#{$card-id} {
+        background-image: url("img/tioc/cards-solo.jpg");
+        background-position: -#{$x*$card-tooltip-width}px -#{$y*$card-tooltip-height}px;
+        width: #{$card-tooltip-width}px;
+        height: #{$card-tooltip-height}px;
+    }
+    $x: $x+1;
+    @if $x>=10 {
+        $x: 0;
+        $y: $y + 1;
+    }
+}
+
+// Solo basket back
+#tioc-card-tooltip-id-999,
+.tioc-card-tooltip-id-999 {
+    background-image: url("img/tioc/cards-solo.jpg");
+    background-position: -#{$x*$card-tooltip-width}px -#{$y*$card-tooltip-height}px;
+    width: #{$card-tooltip-width}px;
+    height: #{$card-tooltip-height}px;
+}
+
+// Regular card back
+$x: $x+1;
+#tioc-card-tooltip-id-998,
+.tioc-card-tooltip-id-998 {
+    background-image: url("img/tioc/cards-solo.jpg");
+    background-position: -#{$x*$card-tooltip-width}px -#{$y*$card-tooltip-height}px;
+    width: #{$card-tooltip-width}px;
+    height: #{$card-tooltip-height}px;
+}
+
+.tioc-card-buy {
+    filter: drop-shadow(0 0 10px blue);
+}
+
+
+/*
+ * Shape controls
+ */
+
+.tioc-grid .tioc-shape {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    z-index: 3;
+}
+
+.tioc-grid #tioc-shape-controls .tioc-shape {
+    z-index: 4;
+}
+
+#tioc-shape-controls {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 5;
+}
+
+#tioc-shape-controls-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.tioc-shape-control-arrow-container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    pointer-events: none;
+}
+
+#tioc-shape-control-arrow-container-left {
+    transform: translateX(-100%);
+}
+
+#tioc-shape-control-arrow-container-right {
+    transform: translateX(100%);
+}
+
+#tioc-shape-control-arrow-container-up {
+    transform: translateY(-100%);
+}
+
+#tioc-shape-control-arrow-container-down {
+    transform: translateY(100%);
+}
+
+#tioc-shape-control-arrow-container-flip-h {
+    transform: translateX(-100%) translateY(-100%);
+}
+
+#tioc-shape-control-arrow-container-flip-v {
+    transform: translateX(100%) translateY(-100%);
+}
+
+#tioc-shape-control-arrow-container-rotate-cw {
+    transform: translateX(-100%) translateY(100%);
+}
+
+#tioc-shape-control-arrow-container-rotate-ccw {
+    transform: translateX(100%) translateY(100%);
+}
+
+.tioc-shape-control-arrow {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    display: flex;
+    filter: drop-shadow(0 0 2px black);
+    cursor: pointer;
+    pointer-events: all;
+    z-index: 1000;
+}
+
+#tioc-shape-control-button-confirm {
+    position: absolute;
+    left: 25%;
+    bottom: 40px;
+    pointer-events: all;
+    z-index: 1000;
+}
+
+#tioc-shape-control-arrow-left {
+    left: 100%;
+    top: 50%;
+    transform: translate(-100%, -50%) rotate(-90deg);
+    justify-content: flex-end;
+    align-items: flex-end;
+    background-image: url('img/tioc/arrows.png');
+    background-position: 0px 0px;
+}
+
+#tioc-shape-control-arrow-right {
+    left: 0%;
+    top: 50%;
+    transform: translate(0%, -50%) rotate(90deg);
+    justify-content: flex-end;
+    align-items: flex-end;
+    background-image: url('img/tioc/arrows.png');
+    background-position: 0px 0px;
+}
+
+#tioc-shape-control-arrow-up {
+    left: 50%;
+    top: 100%;
+    transform: translate(-50%, -100%);
+    justify-content: flex-end;
+    align-items: center;
+    background-image: url('img/tioc/arrows.png');
+    background-position: 0px 0px;
+}
+
+#tioc-shape-control-arrow-down {
+    left: 50%;
+    top: 0%;
+    transform: translate(-50%, 0%) rotate(-180deg);
+    justify-content: flex-end;
+    align-items: flex-end;
+    background-image: url('img/tioc/arrows.png');
+    background-position: 0px 0px;
+}
+
+#tioc-shape-control-arrow-flip-h {
+    right: 0%;
+    bottom: 0%;
+    justify-content: flex-end;
+    align-items: end;
+    background-image: url('img/tioc/arrows.png');
+    background-position: -80px 0px;
+}
+
+#tioc-shape-control-arrow-flip-v {
+    left: 0%;
+    bottom: 0%;
+    justify-content: flex-start;
+    align-items: end;
+    transform: rotate(90deg);
+    background-image: url('img/tioc/arrows.png');
+    background-position: -80px 0px;
+}
+
+#tioc-shape-control-arrow-rotate-cw {
+    right: 0%;
+    top: 0%;
+    justify-content: flex-end;
+    align-items: flex-end;
+    transform: scaleX(-1);
+    background-image: url('img/tioc/arrows.png');
+    background-position: -40px 0px;
+}
+
+#tioc-shape-control-arrow-rotate-ccw {
+    left: 0%;
+    top: 0%;
+    justify-content: flex-start;
+    align-items: flex-end;
+    background-image: url('img/tioc/arrows.png');
+    background-position: -40px 0px;
+}
+
+
+/*
+ * Top shapes
+ */
+
+.tioc-top-shapes {
+    width: 100%;
+    display: flex;
+    background-color: lightblue;
+}
+
+.tioc-top-shapes-middle {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.tioc-top-shapes-grid {
+    width: 10px;
+    height: 10px;
+    box-sizing: border-box;
+}
+
+.tioc-top-shapes-grid.tioc-filled {
+    border: 1px black solid;
+    background-color: lightgray;
+}
+
+@each $color-name in $color-names {
+    .tioc-top-shapes-grid.#{$color-name} {
+        background-color: map.get($color-from-names, $color-name);
+    }
+}
+
+.tioc-top-shapes-grid.rare {
+    background-color: darkgray;
+}
+
+.tioc-top-shapes-grid.oshax {
+    background-color: white;
+}
+
+.tioc-top-shapes-parent {
+    display: inline-grid;
+    padding: 5px;
+    margin: 5px;
+    grid-auto-rows: 10px;
+}
+
+
+/*
+ * Score table
+ */
+
+#tioc-score-table-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#tioc-score-table,
+#tioc-score-table-solo {
+    margin: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    background-image: url("img/tioc/seamless-paper-texture.png");
+    background-repeat: repeat;
+    display: inline-block;
+    td {
+        padding: 10px;
+        text-align: center;
+        border-bottom: 1px #00000040 solid;
+    }
+    thead td {
+        font-weight: bold;
+        text-shadow: 1px 1px 1px #000000;
+    }
+    tbody tr:last-child td {
+        border-bottom: none;
+        border-top: 3px #00000040 double;
+        font-weight: bold;
+    }
+    th {
+        padding: 10px;
+    }
+}
+
+
+/*
+ * Color ref
+ */
+
+#tioc-color-ref-container {
+    display: flex;
+    justify-content: center;
+    background-color: #8a457180;
+}
+
+#tioc-color-ref-cat {
+    background-image: url("img/tioc/color-ref.jpg");
+    width: 250px;
+    height: 349px;
+    border-radius: 5px;
+    filter: drop-shadow(0 0 1px black);
+    background-position: 0px 0px;
+    margin: 10px;
+}
+
+#tioc-color-ref-map {
+    background-image: url("img/tioc/color-ref.jpg");
+    width: 250px;
+    height: 349px;
+    border-radius: 5px;
+    filter: drop-shadow(0 0 1px black);
+    background-position: 0px -349px;
+    margin: 10px;
+}
+
+
+/*
+ * Interactive elements
+ */
+
+.tioc-clickable {
+    border: 2px solid red;
+    cursor: pointer !important;
+}
+
+.tioc-clickable.tioc-clickable-no-border {
+    border: none;
+}
+
+.tioc-selected {
+    border: 4px solid blue !important;
+    cursor: pointer !important;
+    box-shadow: inset 0px 0px 0 2000px #0000ff33;
+}
+
+@media (max-width: 480px) {
+    .tioc-clickable {
+        border: 5px solid red;
+    }
+    .tioc-selected {
+        border: 6px solid blue !important;
+    }
+}
+
+.tioc-hidden {
+    display: none !important;
+}
+
+.tioc-family .tioc-family-hidden {
+    display: none !important;
+}
+
+.tioc-animate-to-hidden-start {
+    opacity: 1;
+    max-height: 999px;
+    max-width: 999px;
+    transition: opacity 750ms linear 0s, max-height 0s linear 500ms, max-width 0s linear 500ms, margin 0s linear 500ms, padding 0s linear 500ms;
+    pointer-events: none;
+}
+
+.tioc-animate-to-hidden-end {
+    opacity: 0 !important;
+    max-height: 0px !important;
+    max-width: 0px !important;
+    margin: 0px !important;
+    border: 0px !important;
+    pointer-events: none;
+}
+
+.tioc-color-choice-list {
+    display: flex;
+    justify-content: center;
+    flex-flow: wrap;
+    align-items: flex-end;
+}
+
+.tioc-color-choice-list .tioc-meeple {
+    margin: 10px;
+}
+
+.tioc-moving {
+    position: absolute !important;
+}
+
+.tioc-small-treasure-list-choice {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 10px;
+    margin: 10px;
+}
+
+.scorenumber {
+    z-index: 5;
+}
+
+.tioc-top-warning {
+    position: relative;
+    padding: 5px;
+    text-align: center;
+    background-color: red;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.tioc-top-warning div {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.tioc-legend-score {
+    display: flex;
+    align-items: center;
+}
+
+.tioc-legend-score ol:first-child {
+    padding-right: 10px;
+    margin-right: 10px;
+    border-right: 1px #00000040 solid;
+}
+
+#tioc-onerror-text {
+    padding: 20px;
+    margin: 20px;
+    background: #ffffffC0;
+    white-space: pre-wrap;
+    max-height: 200px;
+    overflow: scroll;
+}
+
+.tioc-player-name {
+    font-weight: bold;
+    text-shadow: 1px 1px 1px black;
+}
+
+#tioc-help-skip-anytime {
+    display: block;
+    font-size: 50%;
+    line-height: 10px;
+}
+
+.tioc-card-button {
+    font-size: 70%;
+    padding: 5px;
+    border-radius: 10px;
+    position: absolute;
+    bottom: 0px;
+    background: #4871b6c4;
+}
+
+#popin_tioc-card-play-dialog li {
+    margin-bottom: 5px;
+}
+
+#popin_tioc-card-play-dialog .bgabutton {
+    margin: 5px;
+}
+
+#popin_tioc-card-play-dialog p {
+    max-width: 25rem;
+}
+
+.tioc-game-icon {
+    width: 50px;
+    height: 50px;
+    margin: 10px;
+    background-image: url('img/game_icon.png');
+    float: left;
+    border-radius: 5px;
+}
+
+
+/* From 7 Wonders Duel */
+
+.tioc-tooltip-wiggle {
+    -webkit-animation: tooltip-wiggle 2s infinite alternate;
+    animation: tooltip-wiggle 2s infinite alternate;
+    -ms-flex-item-align: center;
+    align-self: center
+}
+
+@-webkit-keyframes tooltip-wiggle {
+    0% {
+        -webkit-transform: perspective(40em) rotateY(-18deg) scale(.93);
+        transform: perspective(40em) rotateY(-18deg) scale(.93);
+        -webkit-animation-timing-function: ease-in-out;
+        animation-timing-function: ease-in-out
+    }
+    to {
+        -webkit-transform: perspective(40em) rotateY(-10deg) scale(.93);
+        transform: perspective(40em) rotateY(-10deg) scale(.93);
+        -webkit-animation-timing-function: ease-in-out;
+        animation-timing-function: ease-in-out
+    }
+}
+
+@keyframes tooltip-wiggle {
+    0% {
+        -webkit-transform: perspective(40em) rotateY(-18deg) scale(.93);
+        transform: perspective(40em) rotateY(-18deg) scale(.93);
+        -webkit-animation-timing-function: ease-in-out;
+        animation-timing-function: ease-in-out
+    }
+    to {
+        -webkit-transform: perspective(40em) rotateY(-10deg) scale(.93);
+        transform: perspective(40em) rotateY(-10deg) scale(.93);
+        -webkit-animation-timing-function: ease-in-out;
+        animation-timing-function: ease-in-out
+    }
+}
