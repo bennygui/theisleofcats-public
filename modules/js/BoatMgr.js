@@ -691,6 +691,24 @@ define(
                     }
                     return Math.max.apply(null, Object.values(colorCount));
                 },
+                countCatColor(colorId) {
+                    let count = 0;
+                    const shapes = document.querySelectorAll('#tioc-player-boat-' + this.game.player_id + ' .tioc-shape');
+                    for (let shape of shapes) {
+                        const shapeId = shape.dataset.shapeId;
+                        const shapeTypeId = this.game.getShapeTypeIdFromShapeId(shapeId);
+                        if (shapeTypeId == this.game.SHAPE_TYPE_ID_CAT && this.game.getShapeColorIdFromShapeId(shapeId) == colorId) {
+                            ++count;
+                        } else if (shapeTypeId == this.game.SHAPE_TYPE_ID_OSHAX) {
+                            const meepleElem = shape.querySelector('.tioc-meeple.cat');
+                            const colorName = this.game.CAT_COLOR_NAMES[colorId];
+                            if (meepleElem.classList.contains(colorName)) {
+                                ++count;
+                            }
+                        }
+                    }
+                    return count;
+                },
                 allowSelectTreasure(onSelectFct) {
                     const addOnClick = (shape) => {
                         const shapeId = shape.dataset.shapeId;

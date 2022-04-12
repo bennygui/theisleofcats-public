@@ -255,7 +255,11 @@ define(
                             this._gainFishForAny(cardId, () => this.game.boatMgr.countCommonTreasure());
                             break;
                         case this.CARD_ANYTIME_TYPE_ID_GAIN_FISH_FOR_CAT_OF_COLOR:
-                            this._gainFishForAny(cardId, () => this.game.boatMgr.countMostCommonColor());
+                            if (this.game.isSoloMode()) {
+                                this._gainFishForCatOfColor(cardId);
+                            } else {
+                                this._gainFishForAny(cardId, () => this.game.boatMgr.countMostCommonColor());
+                            }
                             break;
                     }
                 },
@@ -275,6 +279,50 @@ define(
                         () => {
                             this.game.cardMgr.unuseCard(cardId);
                             this.game.fishMgr.gainCurrentPlayerFish(-1 * fishGain);
+                        },
+                    );
+                    cmd.endCommand();
+                },
+                _gainFishForCatOfColor(cardId) {
+                    const cmd = this.game.commandMgr;
+                    const cmdStateValue = {
+                        actionTypeId: this.ACTION_TYPE_ID_ANYTIME_CARD,
+                        cardId: cardId,
+                        colorId: null,
+                        fishGain: null,
+                    };
+                    cmd.startCommand(cmdStateValue);
+                    cmd.add(
+                        (onContinue, onError) => {
+                            cmd.changeTitle(_('${you} must choose a cat color to gain fish'));
+                            this.game.actionMgr.showColorDialog((colorId) => {
+                                if (colorId === null) {
+                                    onError();
+                                    return;
+                                }
+                                cmdStateValue.colorId = colorId;
+                                cmdStateValue.fishGain = this.game.boatMgr.countCatColor(colorId);
+                                onContinue();
+                            },
+                            {
+                                'blue': '+' + this.game.boatMgr.countCatColor(this.game.CAT_COLOR_ID_BLUE),
+                                'green': '+' + this.game.boatMgr.countCatColor(this.game.CAT_COLOR_ID_GREEN),
+                                'red': '+' + this.game.boatMgr.countCatColor(this.game.CAT_COLOR_ID_RED),
+                                'purple': '+' + this.game.boatMgr.countCatColor(this.game.CAT_COLOR_ID_PURPLE),
+                                'orange': '+' + this.game.boatMgr.countCatColor(this.game.CAT_COLOR_ID_ORANGE),
+                            });
+                        },
+                        () => {},
+                        () => {}
+                    );
+                    cmd.addSimple(
+                        () => {
+                            this.game.cardMgr.useCard(cardId);
+                            this.game.fishMgr.gainCurrentPlayerFish(cmdStateValue.fishGain, 'tioc-card-id-' + cardId);
+                        },
+                        () => {
+                            this.game.cardMgr.unuseCard(cardId);
+                            this.game.fishMgr.gainCurrentPlayerFish(-1 * cmdStateValue.fishGain);
                         },
                     );
                     cmd.endCommand();

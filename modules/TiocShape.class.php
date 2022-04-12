@@ -630,6 +630,7 @@ class TiocShapeMgr extends APP_DbObject
 
     public function discardSoloCat($discardNumber)
     {
+        $this->load();
         $shapeDiscard = $this->discardSolo($discardNumber, function ($shape) {
             return $shape->isCat() && $shape->isInFields();
         });
@@ -641,6 +642,7 @@ class TiocShapeMgr extends APP_DbObject
 
     public function discardSoloOshax($discardNumber)
     {
+        $this->load();
         $shapeDiscard = $this->discardSolo($discardNumber, function ($shape) {
             return $shape->isOshax() && $shape->isOnTable();
         });
@@ -652,6 +654,7 @@ class TiocShapeMgr extends APP_DbObject
 
     public function discardSoloRareTreasure($discardNumber)
     {
+        $this->load();
         $shapeDiscard = $this->discardSolo($discardNumber, function ($shape) {
             return $shape->isRareTreasure() && $shape->isOnTable();
         });
@@ -925,6 +928,7 @@ class TiocShapeMgr extends APP_DbObject
 
     public function countMostCommonColor($playerId)
     {
+        $this->load();
         return max($this->countPerColor($playerId));
     }
 
@@ -1314,6 +1318,7 @@ class TiocShapeMgr extends APP_DbObject
 
     public function getColorShape($playerId, $colorId)
     {
+        $this->load();
         $shapes = [];
         foreach ($this->shapes as $shape) {
             if ($shape->isOnPlayerBoat($playerId) && $shape->colorId !== null && $shape->colorId == $colorId) {

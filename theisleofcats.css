@@ -15999,6 +15999,7 @@
   justify-content: center;
   flex-flow: wrap;
   align-items: flex-end;
+  text-align: center;
 }
 
 .tioc-color-choice-list .tioc-meeple {

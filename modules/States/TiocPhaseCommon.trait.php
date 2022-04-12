@@ -462,7 +462,22 @@ trait TiocPhaseCommon
                 $this->actionAnytimeCardGainFish($card, $playerId, $this->shapeMgr->countCommonTreasure($playerId));
                 break;
             case CARD_ANYTIME_TYPE_ID_GAIN_FISH_FOR_CAT_OF_COLOR:
-                $this->actionAnytimeCardGainFish($card, $playerId, $this->shapeMgr->countMostCommonColor($playerId));
+                $colorId = null;
+                $fishGain = null;
+                if (array_key_exists('colorId', $action)) {
+                    $colorId = value_req_null($action, 'colorId');
+                }
+                if (array_key_exists('fishGain', $action)) {
+                    $fishGain = value_req_null($action, 'fishGain');
+                }
+                if ($this->isSoloMode() && $colorId !== null && $fishGain !== null) {
+                    $fishGainServerSide = count($this->shapeMgr->getColorShape($playerId, $colorId));
+                    if ($fishGain != $fishGainServerSide)
+                        throw new BgaVisibleSystemException("BUG! fishGain $fishGain != $fishGainServerSide in solo mode");
+                    $this->actionAnytimeCardGainFish($card, $playerId, $fishGainServerSide);
+                } else {
+                    $this->actionAnytimeCardGainFish($card, $playerId, $this->shapeMgr->countMostCommonColor($playerId));
+                }
                 break;
             case CARD_ANYTIME_TYPE_ID_DRAW_CARDS_2:
             case CARD_ANYTIME_TYPE_ID_DRAW_CARDS_3:

@@ -36,19 +36,43 @@ define(
                 constructor(game) {
                     this.game = game;
                 },
-                showColorDialog(choiceFunction) {
+                showColorDialog(choiceFunction, options = {}) {
                     this.game.closeAllTooltips();
                     let colorDialog = new ebg.popindialog();
                     colorDialog.create('tioc-color-choice-dialog');
                     colorDialog.setTitle(_("Choose a color:"));
                     colorDialog.setContent(
+                        this.game.format_string_recursive(
                         '<div class="tioc-color-choice-list">' +
-                        '   <div class="tioc-clickable tioc-clickable-no-border tioc-meeple cat blue" data-color-id="0"></div>' +
-                        '   <div class="tioc-clickable tioc-clickable-no-border tioc-meeple cat green" data-color-id="1"></div>' +
-                        '   <div class="tioc-clickable tioc-clickable-no-border tioc-meeple cat red" data-color-id="2"></div>' +
-                        '   <div class="tioc-clickable tioc-clickable-no-border tioc-meeple cat purple" data-color-id="3"></div>' +
-                        '   <div class="tioc-clickable tioc-clickable-no-border tioc-meeple cat orange" data-color-id="4"></div>' +
-                        '</div>');
+                        '   <div>' +
+                        '      <div class="tioc-clickable tioc-clickable-no-border tioc-meeple cat blue" data-color-id="0"></div>' +
+                        '      <div>${blue_count}</div>' +
+                        '   </div>' +
+                        '   <div>' +
+                        '      <div class="tioc-clickable tioc-clickable-no-border tioc-meeple cat green" data-color-id="1"></div>' +
+                        '      <div>${green_count}</div>' +
+                        '   </div>' +
+                        '   <div>' +
+                        '      <div class="tioc-clickable tioc-clickable-no-border tioc-meeple cat red" data-color-id="2"></div>' +
+                        '      <div>${red_count}</div>' +
+                        '   </div>' +
+                        '   <div>' +
+                        '      <div class="tioc-clickable tioc-clickable-no-border tioc-meeple cat purple" data-color-id="3"></div>' +
+                        '      <div>${purple_count}</div>' +
+                        '   </div>' +
+                        '   <div>' +
+                        '      <div class="tioc-clickable tioc-clickable-no-border tioc-meeple cat orange" data-color-id="4"></div>' +
+                        '      <div>${orange_count}</div>' +
+                        '   </div>' +
+                        '</div>',
+                        {
+                            'blue_count': options['blue'] || '',
+                            'green_count': options['green'] || '',
+                            'red_count': options['red'] || '',
+                            'purple_count': options['purple'] || '',
+                            'orange_count': options['orange'] || '',
+                        }
+                    ));
                     colorDialog.replaceCloseCallback(() => {
                         colorDialog.destroy();
                         choiceFunction(null);
