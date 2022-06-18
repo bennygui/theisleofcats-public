@@ -1071,15 +1071,15 @@ class TiocShapeMgr extends APP_DbObject
     {
         $this->load();
         $boat = new TiocBoatGrid();
-        $colorSet = [];
         foreach ($this->shapes as $shape) {
             if (!$shape->isOnPlayerBoat($playerId)) {
                 continue;
             }
             $boat->addShape($shape, $shape->boatTopX, $shape->boatTopY, $shape->boatRotation, $shape->boatHorizontalFlip, $shape->boatVerticalFlip);
-            if ($shape->colorId !== null) {
-                $colorSet[$shape->colorId] = true;
-            }
+        }
+        $colorSet = [];
+        foreach (CAT_COLOR_IDS as $colorId) {
+            $colorSet[$colorId] = true;
         }
         foreach (BOAT_RAT_PLACEMENT[$boatColorName] as $pos) {
             $x = $pos['x'];
