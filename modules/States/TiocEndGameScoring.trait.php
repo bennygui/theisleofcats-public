@@ -795,10 +795,10 @@ trait TiocEndGameScoring
         switch ($card->cardId) {
             case 197:
                 foreach (CAT_COLOR_IDS as $colorId) {
-                    if (count($this->shapeMgr->getColorShape($playerId, $colorId)) <= 0) {
-                        continue;
-                    }
-                    if ($this->shapeMgr->countTreasureTouchingColor($playerId, $colorId) <= 0) {
+                    if (
+                        count($this->shapeMgr->getColorShape($playerId, $colorId)) <= 0
+                        || $this->shapeMgr->countTreasureTouchingColor($playerId, $colorId) <= 0
+                    ) {
                         $score += 5;
                     }
                 }

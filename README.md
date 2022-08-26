@@ -9,4 +9,4 @@ This is my second game on BGA. It is a bit more organised than my first game
 but it relies a bit too much on the client side and duplicates a lot of logic
 on the client side, especially to validate placing shapes on the boats.
 
-This matches version 220618-2254 on BGA.
+This matches version 220726-1539 on BGA.
