@@ -247,7 +247,7 @@ trait TiocPhaseAnytime
     {
         $this->checkAction("phaseAnytimeDrawAndBoatShapeConfirmActions");
         if (count($actionArray) == 0)
-            throw new BgaUserException(self::_('You cannot confirm no actions'));
+            throw new BgaUserException($this->_('You cannot confirm no actions'));
 
         $playerId = $this->getCurrentPlayerId();
         foreach ($actionArray as $action) {

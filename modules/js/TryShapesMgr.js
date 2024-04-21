@@ -154,6 +154,7 @@ define(
                                 this.game.boatMgr.markGridUnused(cmdStateValue.shapeList[i].shapeId, true);
                             }
                             this.game.boatMgr.updateGridOverlay();
+                            this.game.boatMgr.updatePlayerPanelShapeCount();
                         },
                     );
                     cmd.add(

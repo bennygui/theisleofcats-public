@@ -1269,7 +1269,7 @@ class TiocShapeMgr extends APP_DbObject
             }
         }
         // First column has a middle row that touches the edge but not the top and the bottom
-        $shape = $boat->getShapeAt(0, BOAT_TILE_HEIGHT / 2);
+        $shape = $boat->getShapeAt(0, intdiv(BOAT_TILE_HEIGHT, 2));
         if ($shape !== null && $shape->colorId !== null && $shape->colorId == $colorId) {
             $shapes[$shape->shapeId] = $shape;
         }
@@ -1293,6 +1293,10 @@ class TiocShapeMgr extends APP_DbObject
                     return true;
                 }
             }
+        }
+        // First column has a middle row that touches the edge but not the top and the bottom
+        if ($boat->isGridEmpty(0, intdiv(BOAT_TILE_HEIGHT, 2))) {
+            return true;
         }
         return false;
     }

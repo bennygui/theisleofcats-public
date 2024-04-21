@@ -58,15 +58,15 @@ trait TiocPhase2Explore
 
         if ($this->isSoloMode()) {
             if (count($cardIds) != NB_CARDS_KEEP_SOLO)
-                throw new BgaUserException(self::_('You must select exactly 3 draft cards to keep'));
+                throw new BgaUserException($this->_('You must select exactly 3 draft cards to keep'));
         } else {
             if (count($cardIds) != NB_CARDS_KEEP_PER_DRAFT)
-                throw new BgaUserException(self::_('You must select exactly 2 draft cards to keep'));
+                throw new BgaUserException($this->_('You must select exactly 2 draft cards to keep'));
         }
 
         $playerId = $this->getCurrentPlayerId();
         if (!$this->cardMgr->moveDraftCardsToBuy($playerId, $cardIds))
-            throw new BgaUserException(self::_('You must select your draft cards'));
+            throw new BgaUserException($this->_('You must select your draft cards'));
         $this->tiocNotifyPlayer(
             $playerId,
             NTF_MOVE_CARDS,

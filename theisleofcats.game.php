@@ -111,7 +111,7 @@ class theisleofcats extends Table
             $boatColorName = array_shift($tiocBoatColorNames);
             $values[] = "('" . $player_id . "','$color','" . $player['player_canal'] . "','" . addslashes($player['player_name']) . "','" . addslashes($player['player_avatar']) . "', '$colorName', '$boatColorName')";
         }
-        $sql .= implode($values, ',');
+        $sql .= implode(',', $values);
         self::DbQuery($sql);
         self::reattributeColorsBasedOnPreferences($players, CAT_COLORS);
         self::reloadPlayersBasicInfos();
@@ -251,6 +251,35 @@ class theisleofcats extends Table
         return 20 * (START_DAY_NUMBER - $this->getGlobal(STG_DAY_COUNTER));
     }
 
+    /**
+     * Returns an array of user preference colors to game colors.
+     * Game colors must be among those which are passed to reattributeColorsBasedOnPreferences()
+     * Each game color can be an array of suitable colors, or a single color:
+     * [
+     *    // The first available color chosen:
+     *    'ff0000' => ['990000', 'aa1122'],
+     *    // This color is chosen, if available
+     *    '0000ff' => '000099',
+     * ]
+     * If no color can be matched from this array, then the default implementation is used.
+     */
+    function getSpecificColorPairings(): array
+    {
+        return array(
+            "ff0000" /* Red */         => 'd45965',
+            "008000" /* Green */       => '29b35a',
+            "0000ff" /* Blue */        => '67bed0',
+            "ffa500" /* Yellow */      => null,
+            "000000" /* Black */       => null,
+            "ffffff" /* White */       => null,
+            "e94190" /* Pink */        => null,
+            "982fff" /* Purple */      => '9866ab',
+            "72c3b1" /* Cyan */        => null,
+            "f07f16" /* Orange */      => 'dcb039',
+            "bdd002" /* Khaki green */ => null,
+            "7b7b7b" /* Gray */        => null,
+        );
+    }
 
     // Utility functions
 

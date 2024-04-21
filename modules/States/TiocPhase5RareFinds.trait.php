@@ -208,7 +208,7 @@ trait TiocPhase5RareFinds
         }
 
         if ($hasPlayedTreasureCard && !$hasPlacedAnyTreasure)
-            throw new BgaUserException(self::_('You cannot play a treasure card and place no treasure'));
+            throw new BgaUserException($this->_('You cannot play a treasure card and place no treasure'));
 
         $this->notifyUpdateHandCount();
         $this->notifyUpdateBoatUsedGridColor();
@@ -222,10 +222,10 @@ trait TiocPhase5RareFinds
         $this->checkAction("phase5Pass");
         $playerId = $this->getCurrentPlayerId();
         if ($this->turnActionMgr->hasRareFinds($playerId))
-            throw new BgaUserException(self::_('You cannot pass, you have already played a rare find'));
+            throw new BgaUserException($this->_('You cannot pass, you have already played a rare find'));
 
         if ($this->playerOrderMgr->hasPlayerPass($playerId))
-            throw new BgaUserException(self::_('You cannot pass, you have already passed'));
+            throw new BgaUserException($this->_('You cannot pass, you have already passed'));
 
         $this->phase5MarkPass($playerId, false);
         $this->turnActionMgr->updateLastSeenMoveNumber($playerId);
@@ -279,12 +279,12 @@ trait TiocPhase5RareFinds
     {
         $playerId = $this->getCurrentPlayerId();
         if (!$this->turnActionMgr->hasRareFinds($playerId))
-            throw new BgaUserException(self::_('You cannot end your turn, you have not played a rare find'));
+            throw new BgaUserException($this->_('You cannot end your turn, you have not played a rare find'));
         $this->turnActionMgr->resetRareFindsCount($playerId);
         $this->turnActionMgr->resetTreasureCount($playerId);
 
         if ($this->playerOrderMgr->hasPlayerPass($playerId))
-            throw new BgaUserException(self::_('You cannot end your turn, you have already passed'));
+            throw new BgaUserException($this->_('You cannot end your turn, you have already passed'));
 
         $this->turnActionMgr->updateLastSeenMoveNumber($playerId);
         $this->notifyUpdateTurnActions();

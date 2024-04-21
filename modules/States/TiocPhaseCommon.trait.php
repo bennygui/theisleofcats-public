@@ -47,7 +47,7 @@ trait TiocPhaseCommon
                     $price = $this->cardMgr->buyPlayerCard($playerId, $cardId, $colorId);
                     $remainingFish = $this->fishMgr->removeFishFromPlayer($playerId, $price);
                     if ($remainingFish < 0)
-                        throw new BgaUserException(self::_('You do not have enough fish to buy those cards'));
+                        throw new BgaUserException($this->_('You do not have enough fish to buy those cards'));
                     $totalPrice += $price;
                     $buyCardIds[$cardId] = true;
                     break;

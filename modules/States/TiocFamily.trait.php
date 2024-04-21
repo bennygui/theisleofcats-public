@@ -26,12 +26,12 @@ trait TiocFamily
         $this->checkAction("familyKeepLessonCards");
 
         if (count($cardIds) != NB_CARDS_KEEP_FAMILY)
-            throw new BgaUserException(self::_('You must select exactly 2 lesson cards to keep'));
+            throw new BgaUserException($this->_('You must select exactly 2 lesson cards to keep'));
 
         $playerId = $this->getCurrentPlayerId();
         $discardCardId = $this->cardMgr->draftKeepOnlyCardList($playerId, $cardIds);
         if ($discardCardId === null)
-            throw new BgaUserException(self::_('You must select your cards'));
+            throw new BgaUserException($this->_('You must select your cards'));
         $this->tiocNotifyPlayer(
             $playerId,
             NTF_DISCARD_SECRET_CARDS,
@@ -127,7 +127,7 @@ trait TiocFamily
         }
 
         if ($this->playerOrderMgr->hasPlayerPass($playerId))
-            throw new BgaUserException(self::_('You cannot end your turn, you have already passed'));
+            throw new BgaUserException($this->_('You cannot end your turn, you have already passed'));
         $this->notifyUpdateBoatUsedGridColor();
         $this->turnActionMgr->updateLastSeenMoveNumber($playerId);
         $this->notifyUpdateTurnActions();
@@ -141,7 +141,7 @@ trait TiocFamily
         $playerId = $this->getCurrentPlayerId();
 
         if ($this->playerOrderMgr->hasPlayerPass($playerId))
-            throw new BgaUserException(self::_('You cannot pass, you have already passed'));
+            throw new BgaUserException($this->_('You cannot pass, you have already passed'));
 
         $this->familyMarkPass($playerId);
 

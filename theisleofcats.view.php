@@ -26,13 +26,13 @@ class view_theisleofcats_theisleofcats extends game_view
   {
     $currentPlayerId = $this->game->currentPlayerId();
     $playerBasicInfo = $this->game->loadPlayersBasicInfos();
-    $this->tpl['WARN_LAST_TURN_TEXT'] = self::_('The game has ended, this is your last chance to play Anytime cards');
-    $this->tpl['PUBLIC_LESSONS'] = self::_('Public Lessons');
-    $this->tpl['PLAYED_DISCARD'] = self::_('Played Cards');
-    $this->tpl['SOLO_LESSONS'] = self::_('Solo Lessons');
-    $this->tpl['SOLO_COLORS'] = self::_('Solo Colors');
-    $this->tpl['SOLO_BASKETS'] = self::_('Solo Baskets');
-    $this->tpl['COLOR_REF'] = self::_('Color reference');
+    $this->tpl['WARN_LAST_TURN_TEXT'] = $this->_('The game has ended, this is your last chance to play Anytime cards');
+    $this->tpl['PUBLIC_LESSONS'] = $this->_('Public Lessons');
+    $this->tpl['PLAYED_DISCARD'] = $this->_('Played Cards');
+    $this->tpl['SOLO_LESSONS'] = $this->_('Solo Lessons');
+    $this->tpl['SOLO_COLORS'] = $this->_('Solo Colors');
+    $this->tpl['SOLO_BASKETS'] = $this->_('Solo Baskets');
+    $this->tpl['COLOR_REF'] = $this->_('Color reference');
 
     // Player private lessons
     $this->page->begin_block("theisleofcats_theisleofcats", "player-private-lessons");
@@ -46,7 +46,7 @@ class view_theisleofcats_theisleofcats extends game_view
           "PLAYER_ID" => $playerId,
           "PLAYER_NAME" => $playerInfo['player_name'],
           "PLAYER_COLOR" => $playerInfo['player_color'],
-          "PRIVATE_LESSONS" => self::_('Private Lessons'),
+          "PRIVATE_LESSONS" => $this->_('Private Lessons'),
         ]
       );
     }
@@ -60,17 +60,17 @@ class view_theisleofcats_theisleofcats extends game_view
           "PLAYER_ID" => $playerId,
           "PLAYER_NAME" => $playerInfo['player_name'],
           "PLAYER_COLOR" => $playerInfo['player_color'],
-          "PRIVATE_LESSONS" => self::_('Private Lessons'),
+          "PRIVATE_LESSONS" => $this->_('Private Lessons'),
         ]
       );
     }
 
-    $titleDraft = self::_('Draft Two');
+    $titleDraft = $this->_('Draft Two');
     if ($this->game->isFamilyMode()) {
-      $titleDraft = self::_('Keep Two');
+      $titleDraft = $this->_('Keep Two');
     }
     if ($this->game->isSoloMode()) {
-      $titleDraft = self::_('Keep Three');
+      $titleDraft = $this->_('Keep Three');
     }
 
     // Player board
@@ -87,9 +87,9 @@ class view_theisleofcats_theisleofcats extends game_view
           "PLAYER_COLOR" => $playerInfo['player_color'],
           "BOAT_COLOR_NAME" => $this->game->playerOrderMgr->getPlayerBoatColorName($playerId),
           "DRAFT" => $titleDraft,
-          "BUY" => self::_('Click to Buy (cards left here will be discarded)'),
-          "HAND" => self::_('Current Hand'),
-          "TABLE" => self::_('Rescue Cards'),
+          "BUY" => $this->_('Click to Buy (cards left here will be discarded)'),
+          "HAND" => $this->_('Current Hand'),
+          "TABLE" => $this->_('Rescue Cards'),
         ]
       );
     }
@@ -105,9 +105,9 @@ class view_theisleofcats_theisleofcats extends game_view
           "PLAYER_COLOR" => $playerInfo['player_color'],
           "BOAT_COLOR_NAME" => $this->game->playerOrderMgr->getPlayerBoatColorName($playerId),
           "DRAFT" => $titleDraft,
-          "BUY" => self::_('Click to Buy (cards left here will be discarded)'),
-          "HAND" => self::_('Current Hand'),
-          "TABLE" => self::_('Rescue Cards'),
+          "BUY" => $this->_('Click to Buy (cards left here will be discarded)'),
+          "HAND" => $this->_('Current Hand'),
+          "TABLE" => $this->_('Rescue Cards'),
         ]
       );
     }

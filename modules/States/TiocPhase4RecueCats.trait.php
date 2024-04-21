@@ -25,7 +25,7 @@ trait TiocPhase4RecueCats
         $playerId = $this->getCurrentPlayerId();
         $playedCards = $this->cardMgr->moveRecueCardFromHandToTablePrivate($playerId, $cardIds);
         if ($playedCards === null || count($playedCards) != count($cardIds))
-            throw new BgaUserException(self::_('You can only play your cards'));
+            throw new BgaUserException($this->_('You can only play your cards'));
 
         if (!$this->isSoloMode()) {
             $this->tiocNotifyAllPlayers(
@@ -232,10 +232,10 @@ trait TiocPhase4RecueCats
         $this->checkAction("phase4Pass");
         $playerId = $this->getCurrentPlayerId();
         if ($this->turnActionMgr->hasRescuedCat($playerId))
-            throw new BgaUserException(self::_('You cannot pass, you have already rescued cats'));
+            throw new BgaUserException($this->_('You cannot pass, you have already rescued cats'));
 
         if ($this->playerOrderMgr->hasPlayerPass($playerId))
-            throw new BgaUserException(self::_('You cannot pass, you have already passed'));
+            throw new BgaUserException($this->_('You cannot pass, you have already passed'));
 
         $this->phase4MarkPass($playerId, false);
         $this->turnActionMgr->updateLastSeenMoveNumber($playerId);
@@ -289,12 +289,12 @@ trait TiocPhase4RecueCats
     {
         $playerId = $this->getCurrentPlayerId();
         if (!$this->turnActionMgr->hasRescuedCat($playerId))
-            throw new BgaUserException(self::_('You cannot end your turn, you have not rescued a cat'));
+            throw new BgaUserException($this->_('You cannot end your turn, you have not rescued a cat'));
         $this->turnActionMgr->resetRescueCatCount($playerId);
         $this->turnActionMgr->resetTreasureCount($playerId);
 
         if ($this->playerOrderMgr->hasPlayerPass($playerId))
-            throw new BgaUserException(self::_('You cannot end your turn, you have already passed'));
+            throw new BgaUserException($this->_('You cannot end your turn, you have already passed'));
 
         $this->turnActionMgr->updateLastSeenMoveNumber($playerId);
         $this->notifyUpdateTurnActions();
